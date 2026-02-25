@@ -1,0 +1,67 @@
+# Armor
+
+A [BepInEx](https://github.com/BepInEx/BepInEx) mod for **R.E.P.O.** that gives you percentage-based damage reduction from enemies based on your Health and Strength upgrade levels.
+
+## What This Mod Does
+
+Your **Health** and **Strength** upgrades now contribute to a passive armor effect. The higher the damage you receive, the more the reduction matters — making tanky builds more viable in late-game runs.
+
+### How It Works
+
+**Formula:** `taken = baseDamage × (1 − combinedLevel × reductionPerLevel)`
+
+| Health | Strength | Combined | Reduction (default) | 50 dmg hit → | 100 dmg hit → |
+|--------|----------|----------|---------------------|--------------|----------------|
+| 1      | 0        | 1        | 2%                  | 49           | 98             |
+| 3      | 2        | 5        | 10%                 | 45           | 90             |
+| 5      | 5        | 10       | 20%                 | 40           | 80             |
+| 10     | 10       | 20       | 40%                 | 30           | 60             |
+| 15     | 10       | 25       | 50% (capped)        | 25           | 50             |
+
+> **No stats = no reduction.** You must invest in Health or Strength to benefit. Minimum 1 damage is always dealt.
+
+## Configuration
+
+Settings are in `BepInEx/config/headclef.Armor.cfg` or in the **in-game mod config menu**:
+
+| Key | Default | Range | Description |
+|-----|---------|-------|-------------|
+| Enable | `true` | — | Toggle damage reduction on/off |
+| Reduction Per Combined Level | `0.02` | 0.005–0.1 | Reduction % per combined level (0.02 = 2%) |
+| Max Reduction | `0.50` | 0.1–0.9 | Maximum reduction cap (0.50 = 50%) |
+
+## Requirements
+
+- [BepInEx 5.x](https://github.com/BepInEx/BepInEx) installed for R.E.P.O.
+- [Character Stats](https://github.com/headclef/Repo-CharacterStats) — required dependency
+
+## Installation
+
+1. Install via **Thunderstore** (recommended) — Character Stats will be installed automatically.
+2. Or manually: place both `Character Stats.dll` and `Armor.dll` into your `BepInEx/plugins` folder.
+3. Launch the game — config file is generated on first run.
+
+## Multiplayer
+
+- Damage reduction runs **per-client** — only players with the mod installed get the armor.
+- Does not affect other players or enemies.
+
+## Development
+
+### Project Structure
+```
+├── Armor.cs                         # Plugin entry point & config
+├── Patches/
+│   └── DamageReductionPatch.cs      # Harmony prefix — damage reduction
+└── README.md
+```
+
+### Building
+```bash
+dotnet build "../Character Stats/Character Stats.csproj"
+dotnet build
+```
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
