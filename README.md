@@ -57,9 +57,11 @@ Settings are in `BepInEx/config/headclef.Armor.cfg` or in the **in-game mod conf
 ```
 
 ### Building
+
+This project is part of the `Repo.slnx` solution and references Character Stats at compile time. Build the **whole solution** so dependencies build in the correct order:
+
 ```bash
-dotnet build "../Character Stats/Character Stats.csproj"
-dotnet build
+dotnet build ../Repo.slnx
 ```
 
 ## License
