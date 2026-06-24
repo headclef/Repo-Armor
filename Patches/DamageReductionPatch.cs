@@ -21,12 +21,12 @@ internal static class DamageReductionPatch
     /// </summary>
     [HarmonyPatch(typeof(PlayerHealth), nameof(PlayerHealth.Hurt))]
     [HarmonyPrefix]
-    private static void Hurt_Prefix(PlayerHealth __instance, ref int _damage)
+    private static void Hurt_Prefix(PlayerHealth __instance, ref int damage)
     {
         if (!Armor.EnableArmor.Value)
             return;
 
-        if (_damage <= 0)
+        if (damage <= 0)
             return;
 
         if (!AreStatsReady)
@@ -61,12 +61,12 @@ internal static class DamageReductionPatch
             reductionPercent = Math.Min(reductionPercent, maxReduction);
 
             // Apply reduction
-            int originalDamage = _damage;
+            int originalDamage = damage;
             float damageMultiplier = 1f - reductionPercent;
-            _damage = Math.Max(Mathf.RoundToInt(originalDamage * damageMultiplier), 1);
+            damage = Math.Max(Mathf.RoundToInt(originalDamage * damageMultiplier), 1);
 
             Armor.Logger.LogDebug(
-                $"Armor: {originalDamage} -> {_damage} dmg " +
+                $"Armor: {originalDamage} -> {damage} dmg " +
                 $"({reductionPercent:P0} reduction, " +
                 $"Health: {healthLevel}, Strength: {strengthLevel}, combined: {combinedLevel})");
         }
