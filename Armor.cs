@@ -12,7 +12,7 @@ public class Armor : BaseUnityPlugin
 {
     private const string PluginGuid = "headclef.Armor";
     private const string PluginName = "Armor";
-    private const string PluginVersion = "1.1.1";
+    private const string PluginVersion = "1.1.2";
 
     internal static Armor Instance { get; private set; } = null!;
     internal new static ManualLogSource Logger => Instance._logger;

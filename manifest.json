@@ -1,10 +1,10 @@
 {
     "name": "Armor",
-    "version_number": "1.1.1",
+    "version_number": "1.1.2",
     "website_url": "https://github.com/headclef/Repo-Armor",
     "description": "Percentage-based damage reduction from enemies based on your Health and Strength upgrade levels for R.E.P.O.",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2100",
-        "headclef-CharacterStats-1.2.0"
+        "headclef-CharacterStats-1.2.1"
     ]
 }
